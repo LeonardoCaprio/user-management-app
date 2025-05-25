@@ -1,0 +1,15 @@
+.sidenav-container {
+  width: 100%;
+  height: 100vh;
+  background: #eee;
+}
+
+mat-sidenav {
+  transition: width 0.3s;
+  overflow-x: hidden;
+}
+
+.toggle-btn {
+  margin: 8px;
+}
+

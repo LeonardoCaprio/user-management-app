@@ -1,0 +1,244 @@
+<div class="h-full">
+  <div
+    class="min-h-1/12 bg-gray-100 flex items-center justify-between px-4 shadow-sm"
+  >
+    <div class="flex items-center space-x-3">
+      <button
+        mat-raised-button
+        color="primary"
+        class="rounded-full flex items-center bg-white hover:bg-gray-200 p-2 shadow-sm cursor-pointer"
+        (click)="goBack()"
+        id="button-back-user-detail"
+      >
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <p class="text-md lg:text-lg font-medium text-gray-800">
+        User Detail Management
+      </p>
+    </div>
+  </div>
+
+  <ng-container *ngIf="loading; else content">
+    <app-loading />
+  </ng-container>
+
+  <ng-template #content>
+    <div *ngIf="error" class="p-6 h-11/12">
+      <app-error
+        imageSrc="assets/images/notFound.png"
+        errorTitle="User Search Failed"
+        [errorMessage]="error"
+        [showRetry]="false"
+      />
+    </div>
+
+    <div *ngIf="user" class="p-6 space-y-6">
+      <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+        <!-- Left Column - User Overview -->
+        <div class="xl:col-span-1 space-y-6">
+          <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+            <div class="px-6 py-4 border-b border-gray-200">
+              <h2 class="text-lg font-medium text-gray-900">
+                User Information
+              </h2>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center space-x-4 mb-6">
+                <div class="bg-blue-100 rounded-full p-3">
+                  <mat-icon class="text-blue-600 text-2xl">person</mat-icon>
+                </div>
+                <div>
+                  <h3 class="text-lg font-semibold text-gray-900">
+                    {{ user.name }}
+                  </h3>
+                  <p class="text-sm text-gray-500">User ID: #{{ user.id }}</p>
+                </div>
+              </div>
+
+              <div class="space-y-4">
+                <div class="flex justify-between items-center py-2">
+                  <span class="text-sm font-medium text-gray-500"
+                    >Username</span
+                  >
+                  <span class="text-sm text-gray-900">{{ user.username }}</span>
+                </div>
+                <div class="flex justify-between items-center py-2">
+                  <span class="text-sm font-medium text-gray-500">Email</span>
+                  <span class="text-sm text-gray-900">{{ user.email }}</span>
+                </div>
+                <div class="flex justify-between items-center py-2">
+                  <span class="text-sm font-medium text-gray-500">Phone</span>
+                  <span class="text-sm text-gray-900">{{ user.phone }}</span>
+                </div>
+                <div class="flex justify-between items-center py-2">
+                  <span class="text-sm font-medium text-gray-500">Website</span>
+                  <span
+                    id="user-info-website-click"
+                    (click)="openInNewTab(user.website)"
+                    class="text-sm text-blue-600 hover:text-blue-800 cursor-pointer"
+                    >{{ user.website }}</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+            <div class="px-6 py-4 border-b border-gray-200">
+              <div class="flex items-center justify-between">
+                <h2 class="text-lg font-medium text-gray-900">
+                  Company Information
+                </h2>
+                <mat-icon class="text-gray-400">business</mat-icon>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="space-y-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1"
+                    >Company Name</label
+                  >
+                  <p class="text-lg font-semibold text-gray-900">
+                    {{ user.company.name }}
+                  </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1"
+                      >Catch Phrase</label
+                    >
+                    <p
+                      class="text-sm text-gray-600 italic bg-gray-50 px-3 py-2 rounded-md"
+                    >
+                      "{{ user.company.catchPhrase }}"
+                    </p>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1"
+                      >Business Focus</label
+                    >
+                    <p
+                      class="text-sm text-gray-600 bg-gray-50 px-3 py-2 rounded-md"
+                    >
+                      {{ user.company.bs }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column - Detailed Information -->
+        <div class="xl:col-span-2 space-y-6">
+          <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+            <div class="px-6 py-4 border-b border-gray-200">
+              <div class="flex items-center justify-between">
+                <h2 class="text-lg font-medium text-gray-900">
+                  Address Information
+                </h2>
+                <mat-icon class="text-gray-400">location_on</mat-icon>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-4">
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1"
+                      >Street Address</label
+                    >
+                    <p
+                      class="text-sm text-gray-900 bg-gray-50 px-3 py-2 rounded-md"
+                    >
+                      {{ user.address.street }}
+                    </p>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1"
+                      >Suite/Apartment</label
+                    >
+                    <p
+                      class="text-sm text-gray-900 bg-gray-50 px-3 py-2 rounded-md"
+                    >
+                      {{ user.address.suite }}
+                    </p>
+                  </div>
+                </div>
+                <div class="space-y-4">
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1"
+                      >City</label
+                    >
+                    <p
+                      class="text-sm text-gray-900 bg-gray-50 px-3 py-2 rounded-md"
+                    >
+                      {{ user.address.city }}
+                    </p>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1"
+                      >Zip Code</label
+                    >
+                    <p
+                      class="text-sm text-gray-900 bg-gray-50 px-3 py-2 rounded-md"
+                    >
+                      {{ user.address.zipcode }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200"
+              >
+                <div class="flex items-start">
+                  <mat-icon class="text-blue-600 mr-2 flex-shrink-0">info</mat-icon>
+                  <p class="text-sm text-blue-800 flex-1"
+                    >Complete address: {{ user.address.street }},
+                    {{ user.address.suite }}, {{ user.address.city }}
+                    {{ user.address.zipcode }}</p
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+            <div class="px-6 py-4 border-b border-gray-200">
+              <h2 class="text-lg font-medium text-gray-900">Account Status</h2>
+            </div>
+            <div class="p-6">
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div
+                  class="text-center p-4 bg-green-50 rounded-lg border border-green-200"
+                >
+                  <div class="text-2xl md:text-xl font-bold text-green-600">
+                    Active
+                  </div>
+                  <div class="text-sm text-green-600">Account Status</div>
+                </div>
+                <div
+                  class="text-center p-4 bg-blue-50 rounded-lg border border-blue-200"
+                >
+                  <div class="text-2xl md:text-xl font-bold text-blue-600">
+                    Premium
+                  </div>
+                  <div class="text-sm text-blue-600">Service Plan</div>
+                </div>
+                <div
+                  class="text-center p-4 bg-purple-50 rounded-lg border border-purple-200"
+                >
+                  <div class="text-2xl md:text-xl font-bold text-purple-600">
+                    2024
+                  </div>
+                  <div class="text-sm text-purple-600">Member Since</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

@@ -1,0 +1,38 @@
+<div
+  class="min-h-screen flex items-center justify-center p-5"
+>
+  <div class="max-w-2xl w-full text-center bg-white rounded-2xl p-16 shadow-xl" id="welcome-card">
+    <div class="mb-10">
+      <img
+        src="assets/images/dashboard.png"
+        alt="Admin Dashboard Illustration"
+        class="w-72 h-auto max-w-full mx-auto md:w-80"
+      />
+    </div>
+
+    <div class="mb-10">
+      <h1
+        class="text-4xl md:text-5xl font-bold text-gray-800 mb-6 leading-tight"
+      >
+        Welcome to Admin Panel
+      </h1>
+      <p class="text-lg text-gray-600 leading-relaxed max-w-lg mx-auto">
+        Manage all users and monitor your platform activity. Click the button
+        below to access comprehensive user management tools.
+      </p>
+    </div>
+
+    <div class="mt-10">
+      <button
+        mat-raised-button
+        color="primary"
+        class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex items-center mx-auto"
+        (click)="navigateToUserManagement()"
+        id="button-click-user-list"
+      >
+        <mat-icon class="mr-3 text-green-600">people</mat-icon>
+        Go to User Management
+      </button>
+    </div>
+  </div>
+</div>
